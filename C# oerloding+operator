@@ -1,0 +1,60 @@
+using System;
+
+namespace Operatoroverloding
+{
+    class Program
+    {
+        String[] ar;
+        public void showarray()
+        {
+            for (int i = 0; i < ar.Length; i++)
+            {
+                Console.WriteLine(ar[i]);
+            }
+        }
+
+        public static Program operator +(Program ob1, String[] ar1)
+        {
+            Program newobject = new Program();
+            newobject.ar = new string[(ob1.ar.Length + ar1.Length)];
+            for (int i = 0; i < ob1.ar.Length; i++)
+            {
+                newobject.ar[i] = ob1.ar[i];
+            }
+            for (int i = ob1.ar.Length; i < ob1.ar.Length + ar1.Length; i++)
+            {
+                newobject.ar[i] = ar1[i - ob1.ar.Length];
+            }
+
+
+            return newobject;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+
+            //creating first object
+            Program object1 = new Program();
+            object1.ar = new string[5];
+
+            //adding elements in first object
+            object1.ar[0] = "a";
+            object1.ar[1] = "b";
+            object1.ar[2] = "c";
+            object1.ar[3] = "d";
+            object1.ar[4] = "e";
+
+
+            //creating an another array with predefined elements
+            String[] array1 = {"f","g","h","i","j" };
+
+            //adding object1 and array and adding elements into object2 array
+            Program object2 = object1 + array1;
+
+            //showing elements of object2
+            object2.showarray();
+
+        }
+    }
+}
